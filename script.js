@@ -82,6 +82,10 @@ function addInstructionDisplay(selectedPotion, selectedBoost, selectedPotionMode
     if (selectedPotion !== "potion_of_weakness") {
         solution_steps.append($("<li>").html(languageJson.introduce + " " + displayItemText("nether_wart") + " " + languageJson.into_the + displayText('brewing_stand') + "."));
     }
+    data.potions[selectedPotion].items.forEach(function(item) {
+        const instruction_text = languageJson.introduce + " " + displayItemText(item) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect + ".";
+        solution_steps.append($("<li>").html(instruction_text))
+    });
     solution_steps.append($("<li>").html(potion(selectedPotion)))
     if (selectedBoost) {
         solution_steps.append($("<li>").html(potionBoost(selectedBoost)))
@@ -98,16 +102,6 @@ function addInstructionDisplay(selectedPotion, selectedBoost, selectedPotionMode
 function firstStep() {
     const instruction_text = languageJson.prepare + " " + displayText('brewing_stand') + languageJson.with + displayText('water_bottle') + " " + languageJson.and + " " + displayItemText('blaze_powder') + " " + languageJson.as_fuel + ".";
     return instruction_text
-}
-
-function potion(selectedPotion) {
-    steps = []
-    data.potions[selectedPotion].items.forEach(function(item) {
-        var instruction_text = ""
-        instruction_text = languageJson.introduce + " " + displayItemText(item) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect;
-        steps.push(instruction_text + ".");
-    });
-    return steps.join(' <br> ')
 }
 
 function potionBoost(selectedBoost) {
