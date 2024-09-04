@@ -1,0 +1,363 @@
+body {
+    font-family: arial, serif;
+    position: relative;
+    background-color: #e3e4eb;
+}
+
+html[data-theme="light"] {
+  --bg-primary: #e3e4eb;
+  --bg-secondary: white;
+  --fg-primary: #2b2b2b;
+  --fg-secondary: #474747;
+  --link-primary: #2140ba;
+  --link-hover: #2c54ce;
+  --table-text: #191715;
+  --table-group1: #EEE;
+  --table-group2: #DDD;
+  --echlevel-color: var(--link-primary);
+  --echlevel-bg: white;
+  --echlevel-shadow: #888;
+  --enchantment-results: #cfc;
+  --progress-color: #ffc;
+  --error: #f99;
+  --phone-warn: #fa9;
+  --solution: #cfc;
+}
+
+.selectItem:focus, .selectLanguage:focus {
+  outline: none
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--fg-primary);
+}
+
+body h1, body h2 {
+    color: var(--fg-primary);
+}
+
+.selectItem {
+  appearance: none; /* Eliminar la apariencia predeterminada del navegador */
+  font-size: 16px; /* Aumentar el tamaño de la fuente */
+  border: 1px solid var(--table-group1); /* Borde de color según el tema */
+  background-color: var(--table-group1); /* Fondo según el tema */
+  color: var(--table-text); /* Color del texto según el tema */
+  background-image: url("images/down.png"); /* Imagen de la flecha */
+  background-repeat: no-repeat; /* No repetir la imagen */
+  background-position: right 10px center; /* Posicionar la imagen más hacia la derecha */
+  background-size: 16px 16px; /* Aumentar el tamaño de la flecha */
+  padding: 12px 28px 12px 16px; /* Aumentar el padding para hacer más grandes los selects */
+  border-radius: 5px; /* Bordes más redondeados */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  max-width: 400px; /* Limita el ancho máximo */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.selectSecondaryItem {
+  appearance: none; /* Eliminar la apariencia predeterminada del navegador */
+  font-size: 16px; /* Aumentar el tamaño de la fuente */
+  border: 1px solid var(--table-group2); /* Borde de color según el tema */
+  background-color: var(--table-group1); /* Fondo según el tema */
+  color: var(--table-text); /* Color del texto según el tema */
+  background-image: url("images/down.png"); /* Imagen de la flecha */
+  background-repeat: no-repeat; /* No repetir la imagen */
+  background-position: right 10px center; /* Posicionar la imagen más hacia la derecha */
+  background-size: 16px 16px; /* Aumentar el tamaño de la flecha */
+  padding: 12px 28px 12px 16px; /* Aumentar el padding para hacer más grandes los selects */
+  border-radius: 5px; /* Bordes más redondeados */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  max-width: 400px; /* Limita el ancho máximo */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.selectItem:focus, .selectSecondaryItem:focus {
+  border-color: var(--link-primary); /* Cambiar color de borde al enfocar */
+  box-shadow: 0 0 5px rgba(33, 64, 186, 0.5); /* Sombra suave al enfocar */
+  outline: none; /* Eliminar el contorno predeterminado */
+}
+
+.selectItem:hover, .selectSecondaryItem:hover {
+  border-color: var(--link-hover); /* Cambiar el borde al pasar el ratón */
+}
+
+.mode-selection {
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.inner {
+    margin: 30px auto;
+    width: 1000px;
+    padding-bottom: 30px;
+    overflow: auto;
+}
+
+.button-disabled {
+  background-color: #607d8b; /* Color de fondo gris */
+  cursor: not-allowed; /* Cursor para indicar que no está disponible */
+}
+
+.button-enabled {
+  background-color: #007bff;
+}
+
+a {
+    color: var(--link-primary);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.potion {
+  vertical-align: middle;
+  margin-bottom: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+.big-potion {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+  align-items: center;
+}
+
+#potions {
+    width: 400px;
+}
+
+#mode_selection {
+  margin: 0;
+}
+
+#potion-button {
+  padding: 10px 20px; /* Espaciado interno aumentado para un tamaño mayor */
+  font-size: 18px; /* Tamaño de la fuente aumentado */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera para dar un efecto de elevación */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el fondo y la sombra */
+}
+
+#potion-button:hover {
+  background-color: #0056b2; /* Fondo más oscuro al pasar el ratón */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al hacer hover */
+}
+
+#restart {
+  text-align: center;
+  margin-top: 15px;
+}
+
+#restart-button {
+  padding: 10px 20px; /* Espaciado interno aumentado para un tamaño mayor */
+  font-size: 18px; /* Tamaño de la fuente aumentado */
+  color: white; /* Color del texto */
+  background-color: #dc3546; /* Color de fondo gris azulado */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera para dar un efecto de elevación */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el fondo y la sombra */
+}
+
+#restart-button:hover {
+  background-color: #9e0010; /* Fondo más oscuro al pasar el ratón */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al hacer hover */
+}
+
+#potion-options table {
+  width: 100%;
+}
+
+#potion-options td {
+  padding: 0.5em;
+  text-align: center;
+}
+
+#potion-options tr {
+  border-bottom: 1px solid var(--table-group2);
+}
+#calculate {
+    padding: 8px;
+    font-size: 120%;
+}
+
+#left {
+  width: 400px;
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 20px; /* Añadir margen superior */
+  display: flex;
+  float: left;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos verticalmente */
+  gap: 12px; /* Espaciado vertical entre los elementos */
+}
+
+#right {
+  width: 550px;
+  margin: 20px;/* Añadir margen superior */
+  display: flex;
+  float: right;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos verticalmente */
+  gap: 12px; /* Espaciado vertical entre los elementos */
+}
+
+#progress {
+    margin-top: 40px;
+    line-height: 20px;
+    background-color: var(--progress-color);
+    padding: 20px;
+}
+
+#progress img {
+    vertical-align: middle;
+}
+
+#solution {
+    background-color: var(--solution);
+    padding: 20px;
+    margin: 20px;
+    width: 100%;
+}
+
+#solution h2 {
+    text-align: center;
+    margin-block-start: 0;
+}
+
+#potion-type {
+    margin: 10px;
+    margin-left: 15px;
+}
+
+#potion-time {
+    margin: 10px;
+    margin-left: 15px;
+}
+
+#steps li {
+    margin-bottom: 0.75em;
+}
+
+.footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--bg-secondary);
+    padding-right: 20px;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.icon {
+    vertical-align: middle;
+    margin-bottom: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        padding: 10px;
+    }
+
+    .inner {
+        width: auto;
+        max-width: 100%;
+        margin-top: 0;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #left {
+        width: auto;
+        float: none;
+        margin-right: 0;
+    }
+
+    #right {
+        width: auto;
+        float: none;
+    }
+
+    #potions {
+        width: auto;
+    }
+}
+
+#xp-range-note {
+    margin-top: 2em;
+    font-size: 12px;
+}
+
+/* Top container */
+.top-container{
+    float: right;
+    display:flex;
+}
+
+.selectLanguage {
+  appearance: none;
+  font-size: 14px;
+  border: 1px solid var(--table-group2);
+  background-color: var(--table-group1);
+  color: var(--table-text);
+  background-image: url("images/down.png");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 13px 12px;
+  margin-top: 6px;
+  margin-left: 15px;
+  padding: 5px 24px 8px 12px;
+  border-radius: 3px;
+}
+
+@media only screen and (max-width: 422px) {
+  .footer {
+    text-align: center
+  }
+  
+  .footer * {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .dark-mode-toggle-container {
+    margin-top: 12px;
+  }
+} /* smol screens */
+
+@media only screen and (min-width: 423px) {
+  .footer {
+    text-align: right
+  }
+
+  .footer * {
+    display: inline-block;
+  }
+
+  .dark-mode-toggle-container {
+    float: left;
+    margin-top: 13px;
+    margin-left: 12px;
+  }
+} 

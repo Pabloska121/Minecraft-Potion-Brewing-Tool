@@ -1,0 +1,93 @@
+<html lang="en">
+    <head>
+        <title>Minecraft Potion Brewing Tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="data.js"></script>
+        <script src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://unpkg.com/@hungrybluedev/theme-switcher@latest/dist/switch.js" type="module" defer></script>
+    </head>
+    <body>
+        <div class="inner">
+            <div class="top-container">
+                <p>
+                    <label for="language"></label>
+                    <select id="language" class="selectLanguage">
+                        <option value="">Choose a language</option>
+                    </select>
+                </p>
+                
+            </div>
+            
+            <h1>Minecraft Potion Brewing Tool</h1>
+
+            <p>Potions in Minecraft are special items that provide positive or negative effects when consumed or used. There are three main types of potions: <strong>Awkward</strong>, <strong>Splash</strong>, and <strong>Lingering</strong>. Awkward Potions are the base for many other potions and are made by mixing a <strong>Nether Wart</strong> with a <strong>Water Bottle</strong> in the brewing stand. Splash Potions are throwable versions created by adding <strong>Gunpowder</strong>, allowing the effect to impact multiple mobs or players at once. Lingering Potions are made by adding <strong>Dragon's Breath</strong> to a Splash Potion, creating a persistent cloud that applies the effect to anyone who passes through it.</p>
+
+            <p>Each type of potion requires specific ingredients to be brewed, which determines its effect. For example, a <strong>Potion of Healing</strong> is made with a <strong>Glistering Melon Slice</strong>, while a <strong>Potion of Strength</strong> is brewed with <strong>Blaze Powder</strong>. Knowing the correct ingredients is crucial to achieving the desired effect, as using the wrong ones can result in negative effects or potions with no benefits.</p>
+
+            <p>In addition to potion brewing, they can be <strong>enhanced</strong> or <strong>extended</strong>. To enhance a potion, <strong>Glowstone Dust</strong> is used, increasing its potency but reducing its duration. To extend the duration of a potion, <strong>Redstone Dust</strong> is added, which lengthens the effect time without changing its strength. These modifications allow players to tailor potions to their strategic needs and maximize their effectiveness in different game situations.</p>
+
+            <hr>
+
+            <div id="left">
+                <div class="mode-selection">
+                    <p id="mode_selection">
+                        <label>
+                            <input type="radio" name="potion-mode" checked="checked" value="rare">
+                            <span id="awkward-potion"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="potion-mode" value="splash">
+                            <span id="splash-potion"></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="potion-mode" value="lingering">
+                            <span id="lingering-potion"></span>
+                        </label>
+                    </p>
+                </div>
+                <div>
+                    <label for="item"></label>
+                    <select id="item" class="selectItem">
+                        <option value="">Choose an Potion to Brew</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="sub-item"></label>
+                    <select id="sub-item" class="selectSecondaryItem" style="display: none">
+                        <option value="">No boosts applied</option>
+                        <option id="extended" style="display: none">Extend Time</option>
+                        <option id="enhanced" style="display: none">Enhance Power</option>
+                    </select>
+                </div>
+
+                <div class="buttons">
+                    <button id="potion-button" class="button-disabled">Brew</button>
+                    <id="restart">
+                    <button id="restart-button">Reload Page</button>
+                </div>
+
+                <div id="big-potion" class="big-potion">
+                </div>
+            </div>
+
+            <div id="right" style="display: none;">
+                <div id="solution">
+                    <h2 id="solution-header"></h2>
+                    <h4 id="potion-type"></h4>
+                    <h4 id="potion-time"></h4>
+                    <hr>
+                    <h3 id="steps_title">Steps</h3>
+                    <ol id="steps">
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Built by Pablo Asens. <a href="https://github.com/Pabloska121/Minecraft-Potion-Brewing-Tool">Source on Github</a></p>
+        </div>
+    </body>
+</html>
