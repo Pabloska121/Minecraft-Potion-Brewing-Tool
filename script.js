@@ -82,7 +82,7 @@ function addInstructionDisplay(selectedPotion, selectedBoost, selectedPotionMode
     if (selectedPotion !== "potion_of_weakness") {
         solution_steps.append($("<li>").html(languageJson.introduce + " " + displayItemText("nether_wart") + " " + languageJson.into_the + displayText('brewing_stand') + "."));
     }
-    data.potions[selectedPotion].items.forEach(function(item) {
+    data.potions[selectedPotion]["items"].forEach(function(item) {
         const instruction_text = languageJson.introduce + " " + displayItemText(item) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect + ".";
         solution_steps.append($("<li>").html(instruction_text))
     });
