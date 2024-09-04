@@ -86,7 +86,6 @@ function addInstructionDisplay(selectedPotion, selectedBoost, selectedPotionMode
         const instruction_text = languageJson.introduce + " " + displayItemText(item) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect + ".";
         solution_steps.append($("<li>").html(instruction_text))
     });
-    solution_steps.append($("<li>").html(potion(selectedPotion)))
     if (selectedBoost) {
         solution_steps.append($("<li>").html(potionBoost(selectedBoost)))
     }
