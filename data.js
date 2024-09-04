@@ -43,7 +43,7 @@ var data = {
             length: "3:00",
         },
         potion_of_invisibility: {
-            items: ["fermented_spider_eye"],
+            items: ["golden_carrot", "fermented_spider_eye"],
             extended: [true, "8:00", "+"],
             enhanced: [false],
             effects: ["invisibility"],
@@ -85,7 +85,7 @@ var data = {
             length: "1:30"
         },
         potion_of_harming: {
-            items: ["glistering_melon_slice", "fermented_spider_eye"],
+            items: ["spider_eye", "fermented_spider_eye"],
             extended: [false],
             enhanced: [true, "Instant", "II"],
             effects: ["instant_damage"],
