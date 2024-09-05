@@ -35,6 +35,7 @@ function BrewButton() {
         const selectedBoost = $("#sub-item").val();
         if (selectedPotion) {
             $("#right").show()
+            $("#big-potion").show();
             potionTitle(selectedPotion, selectedBoost, selectedPotionMode);
         } else {
             console.error('Por favor, selecciona una poción.');
