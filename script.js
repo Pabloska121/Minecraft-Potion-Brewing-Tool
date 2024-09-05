@@ -143,6 +143,7 @@ function buildPotionSelection() {
 function updateSecondarySelect(selectedItem) {
     const potionData = data.potions[selectedItem];
     const $subItemSelect = $("select#sub-item");
+    document.getElementById("sub-item").value = ""
     $subItemSelect.find("#extended").hide();
     $subItemSelect.find("#enhanced").hide();
     if (potionData["extended"][0] || potionData["enhanced"][0]) {
