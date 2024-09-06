@@ -56,19 +56,23 @@ function potionTitle(selectedPotion, selectedBoost, selectedPotionMode) {
         document.getElementById("potion-type").textContent = languageJson.potion_type + " " + languageJson.lingering_potion;
     }
     
+    var lingering_time;
     if (selectedBoost === languageJson['secondary-items']["extended"] && data["potions"][selectedPotion]["extended"][0]) {
+        lingering_time = data["potions"][selectedPotion]["lingering"][1]
         document.getElementById("potion-time").textContent = languageJson.potion_time + " " + data["potions"][selectedPotion]["extended"][1];
         $("#solution-header").html(languageJson["potions"][selectedPotion] + " " + data["potions"][selectedPotion]["extended"][2] + ":");
     } else if (selectedBoost === languageJson['secondary-items']["enhanced"] && data["potions"][selectedPotion]["enhanced"][0]) {
+        lingering_time = data["potions"][selectedPotion]["lingering"][2]
         document.getElementById("potion-time").textContent = languageJson.potion_time + " " + data["potions"][selectedPotion]["enhanced"][1];
         $("#solution-header").html(languageJson["potions"][selectedPotion] + " " + data["potions"][selectedPotion]["enhanced"][2] + ":");
     } else {
+        lingering_time = data["potions"][selectedPotion]["lingering"][0];
         document.getElementById("potion-time").textContent = languageJson.potion_time + " " + data["potions"][selectedPotion].length;
         $("#solution-header").html(languageJson["potions"][selectedPotion] + ":");
     }
 
     if (selectedPotionMode === "lingering") {
-        document.getElementById("potion-time").textContent = languageJson.potion_time + " " + "0:30";
+        document.getElementById("potion-time").textContent = languageJson.potion_time + " " + lingering_time;
     }
 
     document.getElementById("steps_title").textContent = languageJson.steps_title;
