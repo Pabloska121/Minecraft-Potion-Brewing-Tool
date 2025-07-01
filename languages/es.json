@@ -22,7 +22,9 @@
     "as_fuel": "como combustible",
     "prepare": "Prepare el",
     "with": "con",
-
+    "when_applied": "Al aplicarse",
+    "foods_and_drinks": "Comida y Bebida",
+    
     "awkward_potion": "Poción Rara",
     "splash_potion": "Poción Arrojadiza",
     "lingering_potion": "Poción Persistente",
@@ -32,6 +34,21 @@
         "extended": "Ampliar Tiempo",
         "enhanced": "Aumentar Poder"
     },
+
+    "+3_attack_damage": "Daño de ataque: +3",
+    "+6_attack_damage": "Daño de ataque: +6",
+    "+20%_speed": "+20% Velocidad",
+    "+40%_speed": "+40% Velocidad",
+    "-60%_speed": "-60% Velocidad",
+    "-90%_speed": "-90% Velocidad",
+    "-15%_speed": "-15% Velocidad",
+    "-100%_waypoint_transmit_range": "-100% Rango de transmisión del punto de referencia",
+    "+1_safe_fall_distance": "Distancia de caída segura: +1",
+    "+2_safe_fall_distance": "Distancia de caída segura: +2",
+    "-4_attack_damage": "Daño de ataque: -4",
+    "11_component(s)": "11 componente(s)",
+    "12_component(s)": "12 componente(s)",
+    "13_component(s)": "13 componente(s)",
 
     "items": {
         "nether_wart": "Verruga del Nether",
@@ -59,13 +76,13 @@
 
     "potions": {
         "potion_of_healing": "Poción de Curación",
-        "potion_of_fire_resistance": "Poción de Resistencia al Fuego",
+        "potion_of_fire_resistance": "Poción de Cuerpo Ignífugo",
         "potion_of_regeneration": "Poción de Regeneración",
         "potion_of_strength": "Poción de Fuerza",
         "potion_of_swiftness": "Poción de Velocidad",
         "potion_of_night_vision": "Poción de Visión Nocturna",
         "potion_of_invisibility": "Poción de Invisibilidad",
-        "potion_of_breathing": "Poción de Respiración Acuática",
+        "potion_of_breathing": "Poción de Apnea",
         "potion_of_leaping": "Poción de Salto",
         "potion_of_slow_falling": "Poción de Caída Lenta",
         "potion_of_poison": "Poción de Veneno",
@@ -77,5 +94,27 @@
         "potion_of_infestation": "Poción de Infestación",
         "potion_of_wind_charge": "Poción de Cierzo",
         "potion_of_turtle_master": "Poción del Maestro Tortuga"
+    },
+
+    "potion_effects": {
+        "instant_health": "Daño instantáneo",
+        "fire_resistance": "Cuerpo ignífugo",
+        "regeneration": "Regeneración",
+        "strength": "Fuerza",
+        "speed": "Velocidad",
+        "night_vision": "Visión nocturna",
+        "invisibility": "Invisibilidad",
+        "water_breathing": "Apnea",
+        "jump_boost": "Supersalto",
+        "slow_falling": "Caída lenta",
+        "poison": "Veneno",
+        "weakness": "Debilidad",
+        "instant_damage": "Daño instantáneo",
+        "slowness": "Lentitud",
+        "oozing": "Mucosidad",
+        "weaving": "Tejedura",
+        "infestation": "Infestación",
+        "wind_charged": "Cierzo",
+        "resistance": "Resistencia"
     }
 }

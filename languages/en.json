@@ -1,9 +1,8 @@
 {
     "h1_title":"Minecraft Potion Brewing Tool - Craft, Recipes, and Effects",
-
     "paragraph_1": "Discover the ultimate guide to Minecraft crafting! Whether you're building massive structures or brewing powerful potions, we've got you covered. Explore potion recipes and crafting tips to create items like Minecraft potions and more.",
     "paragraph_2": "Our Minecraft tutorial includes a detailed potion chart to guide you through crafting essentials. Learn how to make everything from splash potions to unique blocks while navigating through the world of Minecraft crafting ideas.",
-    "paragraph_3": "From crafting tables to weakness potions, Minecraft offers endless opportunities to create. Dive into the latest Minecraft updates, including version 1.20, and uncover all the craftable items you need to enhance your adventure.",
+    "paragraph_3": "From crafting tables to weakness potions, Minecraft offers endless opportunities to create. Dive into the latest Minecraft updates, including version 1.21+, and uncover all the craftable items you need to enhance your adventure.",
 
     "choose_a_potion_to_brew": "Choose an Potion to Brew",
     "reload_page": "Restart",
@@ -23,6 +22,8 @@
     "as_fuel": "as fuel",
     "prepare": "Prepare",
     "with": "with",
+    "when_applied": "When Applied",
+    "foods_and_drinks": "Foods & Drinks",
 
     "awkward_potion": "Awkward Potion",
     "splash_potion": "Splash Potion",
@@ -33,6 +34,21 @@
         "extended": "Extend Time",
         "enhanced": "Enhanced Power"
     },
+
+    "+3_attack_damage": "+3 Attack Damage",
+    "+6_attack_damage": "+6 Attack Damage",
+    "+20%_speed": "+20% Speed",
+    "+40%_speed": "+40% Speed",
+    "-60%_speed": "-60% Speed",
+    "-90%_speed": "-90% Speed",
+    "-15%_speed": "-15% Speed",
+    "-100%_waypoint_transmit_range": "-100% Waypoint Transmit Range",
+    "+1_safe_fall_distance": "+1 Safe Fall Distance",
+    "+2_safe_fall_distance": "+2 Safe Fall Distance",
+    "-4_attack_damage": "-4 Attack Damage",
+    "11_component(s)": "11 component(s)",
+    "12_component(s)": "12 component(s)",
+    "13_component(s)": "13 component(s)",
 
     "items": {
         "nether_wart": "Nether Wart",
@@ -78,5 +94,27 @@
         "potion_of_infestation": "Potion of Infestation",
         "potion_of_wind_charge": "Potion of Wind Charge",
         "potion_of_turtle_master": "Potion of the Turtle Master"
+    },
+
+    "potion_effects": {
+        "instant_health": "Instant Health",
+        "fire_resistance": "Fire Resistance",
+        "regeneration": "Regeneration",
+        "strength": "Strength",
+        "speed": "Speed",
+        "night_vision": "Night Vision",
+        "invisibility": "Invisibility",
+        "water_breathing": "Water Breathing",
+        "jump_boost": "Jump Boost",
+        "slow_falling": "Slow Falling",
+        "poison": "Poison",
+        "weakness": "Weakness",
+        "instant_damage": "Instant Damage",
+        "slowness": "Slowness",
+        "oozing": "Oozing",
+        "weaving": "Weaving",
+        "infestation": "Infested",
+        "wind_charged": "Wind Charged",
+        "resistance": "Resistance"
     }
 }

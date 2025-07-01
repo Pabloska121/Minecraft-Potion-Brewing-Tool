@@ -15,49 +15,63 @@
         <meta property="og:type" content="website">
 
         <link rel="icon" type="image/png" href="https://pabloska121.github.io/Minecraft-Potion-Brewing-Tool/images/potions/rare/potion_of_swiftness.png">
-
+        <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="data.js"></script>
-        <script src="script.js"></script>
         <script src="https://unpkg.com/@hungrybluedev/theme-switcher@latest/dist/switch.js" type="module"></script>
     </head>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/minecraftia');
+    </style>
     <body>
+        <div class="background"></div>
         <div class="inner">
             <div class="top-container">
                 <p>
-                    <label for="language"></label>
-                    <select id="language" class="selectLanguage">
-                        <option value="">Choose a language</option>
-                    </select>
+                  <label for="language"></label>
+                  <select id="language" class="selectLanguage">
+                    <option value="">Choose a language</option>
+                  </select>
                 </p>
-                
-            </div>
+            </div>              
             
             <h1>How to Brew Potions in Minecraft: A Beginner's Guide</h1>
 
-            <p>Discover the ultimate guide to Minecraft crafting! Whether you're building massive structures or brewing powerful potions, we've got you covered. Explore potion recipes and crafting tips to create items like Minecraft potions and more.</p>
-
-            <p>Our Minecraft tutorial includes a detailed potion chart to guide you through crafting essentials. Learn how to make everything from splash potions to unique blocks while navigating through the world of Minecraft crafting ideas.</p>
-
-            <p>From crafting tables to weakness potions, Minecraft offers endless opportunities to create. Dive into the latest Minecraft updates, including version 1.20, and uncover all the craftable items you need to enhance your adventure.</p>
-
+            <div class="expandable">
+                <div class="expandable-title-bar">
+                    <span class="expandable-title">Learn More</span>
+                    <ion-icon class="expandable-icon" name="chevron-back-outline"></ion-icon>
+                </div>
+                <div class="expandable-content-wrapper">
+                    <div class="expandable-content">
+                        <p>Discover the ultimate guide to Minecraft crafting! Whether you're building massive structures or brewing powerful potions, we've got you covered. Explore potion recipes and crafting tips to create items like Minecraft potions and more.</p>
+                        <p>Our Minecraft tutorial includes a detailed potion chart to guide you through crafting essentials. Learn how to make everything from splash potions to unique blocks while navigating through the world of Minecraft crafting ideas.</p>
+                        <p>From crafting tables to weakness potions, Minecraft offers endless opportunities to create. Dive into the latest Minecraft updates, including version 1.21+, and uncover all the craftable items you need to enhance your adventure.</p>
+                    </div>
+                </div>
+            </div>
             <hr>
 
             <div id="left">
                 <div class="mode-selection">
                     <p id="mode_selection">
-                        <label>
-                            <input type="radio" name="potion-mode" checked="checked" value="rare">
+                        <label class="minecraft-radio">
+                            <input type="radio" name="potion-mode" value="rare" checked>
+                            <span class="radio-square"></span>
                             <span id="awkward-potion"></span>
-                        </label>
-                        <label>
+                        </label>                          
+                        <label class="minecraft-radio">
                             <input type="radio" name="potion-mode" value="splash">
+                            <span class="radio-square"></span>
                             <span id="splash-potion"></span>
                         </label>
-                        <label>
+                        <label class="minecraft-radio">
                             <input type="radio" name="potion-mode" value="lingering">
+                            <span class="radio-square"></span>
                             <span id="lingering-potion"></span>
                         </label>
                     </p>
@@ -80,28 +94,30 @@
 
                 <div class="buttons">
                     <button id="potion-button" class="button-disabled">Brew</button>
-                    <id="restart">
                     <button id="restart-button">Reload Page</button>
                 </div>
 
-                <div id="big-potion" class="big-potion">
-                </div>
+                <div class="custom-box" style="display: none">
+                    <div class="potion-info-text">
+                    </div>
+                    <div id="big-potion" class="big-potion">
+                    </div>
+                  </div>
             </div>
 
             <div id="right" style="display: none;">
-                <div id="solution">
+                <div id="solution-wrapper">
+                  <div id="solution">
                     <h2 id="solution-header"></h2>
                     <h4 id="potion-type"></h4>
-                    <h4 id="potion-time"></h4>
-                    <hr>
-                    <h3 id="steps_title">Steps</h3>
-                    <ol id="steps">
-                    </ol>
+                    <div id="steps"></div>
+                  </div>
                 </div>
-            </div>
+            </div>              
         </div>
         <div class="footer">
             <p>Built by Pablo Asens. <a href="https://github.com/Pabloska121/Minecraft-Potion-Brewing-Tool">Source on Github</a></p>
         </div>
+        <script src="script.js"></script>
     </body>
 </html>

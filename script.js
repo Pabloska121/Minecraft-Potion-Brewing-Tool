@@ -1,10 +1,17 @@
 let languageJson;
 let languageId;
+let stepIndex = 1;
 
 const languages = {
     'en': 'English',
     'es': 'Español',
 };
+
+const bg = document.querySelector('.background');
+window.addEventListener('scroll', () => {
+  let offset = window.scrollY * 0.7;
+  bg.style.backgroundPosition = `center ${-offset}px`;
+});
 
 const languages_cache_key = 6;
 
@@ -15,6 +22,17 @@ window.onload = function() {
     initializeReloadButton();
     BrewButton();
 };
+
+document.body.addEventListener("click", (ev) => {
+    const isExpandibleTitle = !!ev.target.closest(".expandable-title-bar");
+    const expandable = ev.target.closest(".expandable");
+
+    if (!isExpandibleTitle) {
+        return;
+    }
+
+    expandable.classList.toggle("expandable-open");
+});
 
 function updateBrewButtonState(isAvailable) {
     const potionButton = document.getElementById('potion-button');
@@ -35,7 +53,7 @@ function BrewButton() {
         const selectedBoost = $("#sub-item").val();
         if (selectedPotion) {
             $("#right").show()
-            $("#big-potion").show();
+            $(".custom-box").show();
             potionTitle(selectedPotion, selectedBoost, selectedPotionMode);
         } else {
             console.error('Por favor, selecciona una poción.');
@@ -44,80 +62,343 @@ function BrewButton() {
 }
 
 function potionTitle(selectedPotion, selectedBoost, selectedPotionMode) {
+    const effect = data["potions"][selectedPotion]["effects"]
+    const effect_color = data["potions"][selectedPotion]["effects_color"]
     $("#big-potion").html('<img src="./images/potions/' + selectedPotionMode + '/' + selectedPotion + '.png" class="big-potion">');
-
-    if (selectedPotionMode === "rare") {
-        document.getElementById("potion-type").textContent = languageJson.potion_type + " " + languageJson.awkward_potion;
-    } 
-    if (selectedPotionMode === "splash") {
-        document.getElementById("potion-type").textContent = languageJson.potion_type + " " + languageJson.splash_potion;
-    }
-    if (selectedPotionMode === "lingering") {
-        document.getElementById("potion-type").textContent = languageJson.potion_type + " " + languageJson.lingering_potion;
-    }
+    $(".potion-info-text").html(`
+        <p>${languageJson['potions'][selectedPotion]}</p>
+        <p style="color: #6157ff">${languageJson["foods_and_drinks"]}</p>
+    `);
     
     var lingering_time;
+    var potiondescription;
+    var enhanced_symbol;
     if (selectedBoost === languageJson['secondary-items']["extended"] && data["potions"][selectedPotion]["extended"][0]) {
         lingering_time = data["potions"][selectedPotion]["lingering"][1]
-        document.getElementById("potion-time").textContent = languageJson.potion_time + " " + data["potions"][selectedPotion]["extended"][1];
-        $("#solution-header").html(languageJson["potions"][selectedPotion] + " " + data["potions"][selectedPotion]["extended"][2] + ":");
+        potiondescription = data["potions"][selectedPotion]["potion_description"][1];
+        $("#solution-header").html(languageJson["potions"][selectedPotion] + ":");
+        enhanced_symbol = "";
+        if (selectedPotionMode !== "lingering") {
+            if (selectedPotion === "potion_of_turtle_master") {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} (${data["potions"][selectedPotion]["extended"][1]})</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} (${data["potions"][selectedPotion]["extended"][1]})</p>
+                `);
+            } else {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${enhanced_symbol + " "}(${data["potions"][selectedPotion]["extended"][1]})</p>
+                `);
+            }
+        }
     } else if (selectedBoost === languageJson['secondary-items']["enhanced"] && data["potions"][selectedPotion]["enhanced"][0]) {
         lingering_time = data["potions"][selectedPotion]["lingering"][2]
-        document.getElementById("potion-time").textContent = languageJson.potion_time + " " + data["potions"][selectedPotion]["enhanced"][1];
+        potiondescription = data["potions"][selectedPotion]["potion_description"][2];
         $("#solution-header").html(languageJson["potions"][selectedPotion] + " " + data["potions"][selectedPotion]["enhanced"][2] + ":");
+        enhanced_symbol = data["potions"][selectedPotion]["enhanced"][2];
+        if (selectedPotionMode !== "lingering") {
+            if (selectedPotion === "potion_of_turtle_master") {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"VI"} (${data["potions"][selectedPotion]["enhanced"][1]})</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"IV"} (${data["potions"][selectedPotion]["enhanced"][1]})</p>
+                `);
+            } else {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}(${data["potions"][selectedPotion]["enhanced"][1]})</p>
+                `);
+            }
+        }
     } else {
         lingering_time = data["potions"][selectedPotion]["lingering"][0];
-        document.getElementById("potion-time").textContent = languageJson.potion_time + " " + data["potions"][selectedPotion].length;
+        potiondescription = data["potions"][selectedPotion]["potion_description"][0];
         $("#solution-header").html(languageJson["potions"][selectedPotion] + ":");
+        enhanced_symbol = "";
+        if (selectedPotionMode !== "lingering") {
+            if (selectedPotion === "potion_of_turtle_master") {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} (${data["potions"][selectedPotion].length})</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} (${data["potions"][selectedPotion].length})</p>
+                `);
+            } else {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}(${data["potions"][selectedPotion].length})</p>
+                `);
+            }
+        }
     }
 
     if (selectedPotionMode === "lingering") {
-        document.getElementById("potion-time").textContent = languageJson.potion_time + " " + lingering_time;
+        if (selectedPotion === "potion_of_turtle_master") {
+            if (selectedBoost === languageJson['secondary-items']["enhanced"] && data["potions"][selectedPotion]["enhanced"][0]) {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"VI"} (${data["potions"][selectedPotion]["lingering"][2]})</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"IV"} (${data["potions"][selectedPotion]["lingering"][2]})</p>
+                `); 
+            } else if (selectedBoost === languageJson['secondary-items']["extended"] && data["potions"][selectedPotion]["extended"][0]){
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} (${data["potions"][selectedPotion]["lingering"][1]})</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} (${data["potions"][selectedPotion]["lingering"][1]})</p>
+                `);
+            } else {
+                $(".potion-info-text").append(`
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} (${data["potions"][selectedPotion]["lingering"][0]})</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} (${data["potions"][selectedPotion]["lingering"][0]})</p>
+                `);
+            }
+        } else {
+            $(".potion-info-text").append(`
+                <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}(${lingering_time})</p>
+            `);
+        }
     }
 
-    document.getElementById("steps_title").textContent = languageJson.steps_title;
+    if (potiondescription !== "") {
+        if (selectedPotionMode === "lingering") {
+            $(".potion-info-text").append(`
+                <br>
+                <p style="color: #AA00AA;">${languageJson["when_applied"]}:</p>
+                <p style="color: ${effect_color[0]};">${languageJson[potiondescription]}:</p>
+            `);
+        } else {
+            $(".potion-info-text").append(`
+                <br>
+                <p style="color: #AA00AA;">${languageJson["when_applied"]}:</p>
+                <p style="color: ${effect_color[0]};">${languageJson[potiondescription]}:</p>
+            `);
+        }
+    }
+
+    if (selectedPotionMode === "rare") {
+        $(".potion-info-text").append(`
+            <p style="color: grey;">minecraft:potion</p>
+            <p style="color: grey;">${languageJson["13_component(s)"]}</p>
+        `);
+    } else if (selectedPotionMode === "splash") {
+        $(".potion-info-text").append(`
+            <p style="color: grey;">minecraft:${selectedPotionMode}_potion</p>
+            <p style="color: grey;">${languageJson["11_component(s)"]}</p>
+        `);
+    } else {
+        $(".potion-info-text").append(`
+            <p style="color: grey;">minecraft:${selectedPotionMode}_potion</p>
+            <p style="color: grey;">${languageJson["12_component(s)"]}</p>
+        `);
+    }
+
 
     addInstructionDisplay(selectedPotion, selectedBoost, selectedPotionMode);
 }
 
 function addInstructionDisplay(selectedPotion, selectedBoost, selectedPotionMode) {
-    const solution_steps = $("#steps");
+    stepIndex = 1;
+    var solution_steps = $("#steps");
     solution_steps.empty();
-    solution_steps.append($("<li>").html(firstStep()))
+    solution_steps.append("<hr>");
+    //STEP 1
+    var step = $("<div>").addClass("step-row");
+
+    var leftContainer = $("<div>").addClass("left-container");
+    var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+    var left = $("<div>").addClass("step-left").html(firstStep());
+
+    leftContainer.append(title).append(left);
+
+    var right = $(`
+        <div class="step-right">
+          <img src="./images/potions_menu.png" class="step-image">
+          <img src="./images/water_bottle.png" class="overlay-item" style="top: 150px; left: 162px;">
+          <img src="./images/water_bottle.png" class="overlay-item" style="top: 150px; left: 325px;">
+          <img src="./images/water_bottle.png" class="overlay-item" style="top: 175px; left: 243px;">
+          <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+        </div>
+      `);      
+    stepIndex += 1
+    step.append(leftContainer).append(right);
+    solution_steps.append(step);
+    solution_steps.append("<hr>");
+    //STEP 2
     if (selectedPotion !== "potion_of_weakness") {
-        solution_steps.append($("<li>").html(languageJson.introduce + " " + displayItemText("nether_wart") + " " + languageJson.into_the + displayText('brewing_stand') + "."));
+        step = $("<div>").addClass("step-row");
+
+        var leftContainer = $("<div>").addClass("left-container");
+        var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+        var left = $("<div>").addClass("step-left").html(
+            languageJson.introduce + " " + displayItemText("nether_wart") + " " + languageJson.into_the + displayText('brewing_stand') + "."
+        );
+
+        leftContainer.append(title).append(left);
+
+        var right = $(`
+            <div class="step-right">
+            <img src="./images/potions_menu.png" class="step-image">
+            <img src="./images/nether_wart.png" class="overlay-item" style="top: 29px; left: 243px;">
+            <img src="./images/water_bottle.png" class="overlay-item" style="top: 150px; left: 162px;">
+            <img src="./images/water_bottle.png" class="overlay-item" style="top: 150px; left: 325px;">
+            <img src="./images/water_bottle.png" class="overlay-item" style="top: 175px; left: 243px;">
+            <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+            </div>
+        `); 
+
+        step.append(leftContainer).append(right);
+        solution_steps.append(step);
+        solution_steps.append("<hr>");
+        stepIndex += 1;
+
     }
     data.potions[selectedPotion]["items"].forEach(function(item) {
-        const instruction_text = languageJson.introduce + " " + displayItemText(item) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect + ".";
-        solution_steps.append($("<li>").html(instruction_text))
+        step = $("<div>").addClass("step-row");
+
+        var leftContainer = $("<div>").addClass("left-container");
+        var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+        var left = $("<div>").addClass("step-left").html(
+            languageJson.introduce + " " + displayItemText(item) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect + "."
+        );
+
+        leftContainer.append(title).append(left);
+
+        var right = $(`
+            <div class="step-right">
+            <img src="./images/potions_menu.png" class="step-image">
+            <img src="./images/${item}.png" class="overlay-item" style="top: 29px; left: 243px;">
+            <img src="./images/potions/rare/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 162px;">
+            <img src="./images/potions/rare/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 325px;">
+            <img src="./images/potions/rare/${selectedPotion}.png" class="overlay-item" style="top: 175px; left: 243px;">
+            <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+            </div>
+        `);
+
+        step.append(leftContainer).append(right);
+        solution_steps.append(step);
+        solution_steps.append("<hr>");
+        stepIndex += 1;
     });
 
     if (selectedBoost) {
-        solution_steps.append($("<li>").html(potionBoost(selectedBoost)))
+        step = $("<div>").addClass("step-row");
+
+        var leftContainer = $("<div>").addClass("left-container");
+        var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+        var left = $("<div>").addClass("step-left").html(
+            languageJson.introduce + " " + displayItemText(potionBoost(selectedBoost)[1]) + " " + languageJson.into_the + " " + displayText('brewing_stand') + " " + languageJson.to_give_effect + "."
+        );
+
+        leftContainer.append(title).append(left);
+
+        var right = $(`
+            <div class="step-right">
+            <img src="./images/potions_menu.png" class="step-image">
+            <img src="./images/${potionBoost(selectedBoost)[1]}.png" class="overlay-item" style="top: 29px; left: 243px;">
+            <img src="./images/potions/rare/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 162px;">
+            <img src="./images/potions/rare/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 325px;">
+            <img src="./images/potions/rare/${selectedPotion}.png" class="overlay-item" style="top: 175px; left: 243px;">
+            <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+            </div>
+        `);
+
+        step.append(leftContainer).append(right);
+        solution_steps.append(step);
+        if (selectedPotionMode !== "rare") {
+            solution_steps.append("<hr>");
+        }
+        stepIndex += 1;
     }
     if (selectedPotionMode === "splash") {
-        solution_steps.append($("<li>").html(languageJson.introduce + " " + displayItemText("gunpowder") + " " + languageJson.into_the + displayText('brewing_stand') + "."))
+        step = $("<div>").addClass("step-row");
+
+        var leftContainer = $("<div>").addClass("left-container");
+        var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+        var left = $("<div>").addClass("step-left").html(
+            languageJson.introduce + " " + displayItemText("gunpowder") + " " + languageJson.into_the + " " + displayText('brewing_stand') + "."
+        );
+
+        leftContainer.append(title).append(left);
+
+        var right = $(`
+            <div class="step-right">
+            <img src="./images/potions_menu.png" class="step-image">
+            <img src="./images/gunpowder.png" class="overlay-item" style="top: 29px; left: 243px;">
+            <img src="./images/potions/${selectedPotionMode}/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 162px;">
+            <img src="./images/potions/${selectedPotionMode}/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 325px;">
+            <img src="./images/potions/${selectedPotionMode}/${selectedPotion}.png" class="overlay-item" style="top: 175px; left: 243px;">
+            <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+            </div>
+        `);
+
+        step.append(leftContainer).append(right);
+        solution_steps.append(step);
+        stepIndex += 1;
+
     }
     if (selectedPotionMode === "lingering") {
-        solution_steps.append($("<li>").html(languageJson.introduce + " " + displayItemText("gunpowder") + " " + languageJson.into_the + displayText('brewing_stand') + "."))
-        solution_steps.append($("<li>").html(languageJson.introduce + " " + displayItemText("dragons_breath") + " " + languageJson.into_the + displayText('brewing_stand') + "."))
+        step = $("<div>").addClass("step-row");
+
+        var leftContainer = $("<div>").addClass("left-container");
+        var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+        var left = $("<div>").addClass("step-left").html(
+            languageJson.introduce + " " + displayItemText("gunpowder") + " " + languageJson.into_the + " " + displayText('brewing_stand') + "."
+        );
+
+        leftContainer.append(title).append(left);
+
+        var right = $(`
+            <div class="step-right">
+            <img src="./images/potions_menu.png" class="step-image">
+            <img src="./images/gunpowder.png" class="overlay-item" style="top: 29px; left: 243px;">
+            <img src="./images/potions/splash/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 162px;">
+            <img src="./images/potions/splash/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 325px;">
+            <img src="./images/potions/splash/${selectedPotion}.png" class="overlay-item" style="top: 175px; left: 243px;">
+            <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+            </div>
+        `);
+
+        step.append(leftContainer).append(right);
+        solution_steps.append(step);
+        solution_steps.append("<hr>");
+        stepIndex += 1;
+        
+        step = $("<div>").addClass("step-row");
+
+        var leftContainer = $("<div>").addClass("left-container");
+        var title = $("<div>").addClass("step_number-left").html(`<strong>#${stepIndex}.</strong>`);
+        var left = $("<div>").addClass("step-left").html(
+            languageJson.introduce + " " + displayItemText("dragons_breath") + " " + languageJson.into_the + " " + displayText('brewing_stand') + "."
+        );
+
+        leftContainer.append(title).append(left);
+
+        var right = $(`
+            <div class="step-right">
+            <img src="./images/potions_menu.png" class="step-image">
+            <img src="./images/dragons_breath.png" class="overlay-item" style="top: 29px; left: 243px;">
+            <img src="./images/potions/${selectedPotionMode}/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 162px;">
+            <img src="./images/potions/${selectedPotionMode}/${selectedPotion}.png" class="overlay-item" style="top: 150px; left: 325px;">
+            <img src="./images/potions/${selectedPotionMode}/${selectedPotion}.png" class="overlay-item" style="top: 175px; left: 243px;">
+            <img src="./images/blaze_powder.png" class="overlay-item" style="top: 29px; left: 24px;">
+            </div>
+        `);
+
+        step.append(leftContainer).append(right);
+        solution_steps.append(step);
+        stepIndex += 1;
     }
 }
 
 function firstStep() {
-    const instruction_text = languageJson.prepare + " " + displayText('brewing_stand') + languageJson.with + displayText('water_bottle') + " " + languageJson.and + " " + displayItemText('blaze_powder') + " " + languageJson.as_fuel + ".";
+    const instruction_text = languageJson.prepare + " " + displayText('brewing_stand') + " " + languageJson.with + displayText('water_bottle') + " " + languageJson.and + " " + displayItemText('blaze_powder') + " " + languageJson.as_fuel + ".";
     return instruction_text
 }
 
 function potionBoost(selectedBoost) {
     var instruction_text;
+    var item;
     if (selectedBoost === languageJson['secondary-items']["extended"]) {
+        item = "redstone_dust"
         instruction_text = languageJson.add + " " + displayItemText("redstone_dust") + " " + languageJson.to_extend_duration;
     } else if (selectedBoost === languageJson['secondary-items']["enhanced"]) {
+        item = "glowstone_dust"
         instruction_text = languageJson.add + " " + displayItemText("glowstone_dust") + " " + languageJson.to_increase_power;
     }
 
-    return instruction_text + "."
+    return [instruction_text + ".", item]
 }
 
 function displayText(text) {
@@ -186,7 +467,7 @@ function resetSelects() {
     potionButton.classList.add('button-disabled');
     $("#sub-item").hide(); 
     $("#right").hide();
-    $("#big-potion").hide();
+    $(".custom-box").hide();
 }
 
 function languageChangeListener(){
@@ -195,7 +476,7 @@ function languageChangeListener(){
         const selectedValue = selectLanguage.value;
         changePageLanguage(selectedValue);
         $("#right").hide();
-        $("#big-potion").hide();
+        $(".custom-box").hide();
     });
 }
 
