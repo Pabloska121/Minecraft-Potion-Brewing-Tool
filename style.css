@@ -3,6 +3,7 @@ body {
   position: relative;
   background-color: var(--bg-primary);
   color: var(--fg-primary);
+  overflow-x: hidden;
 }
 
 html[data-theme="light"] {
