@@ -76,51 +76,51 @@ function potionTitle(selectedPotion, selectedBoost, selectedPotionMode) {
     if (selectedBoost === languageJson['secondary-items']["extended"] && data["potions"][selectedPotion]["extended"][0]) {
         lingering_time = data["potions"][selectedPotion]["lingering"][1]
         potiondescription = data["potions"][selectedPotion]["potion_description"][1];
-        $("#solution-header").html(languageJson["potions"][selectedPotion] + ":");
+        $("#solution-header").html(languageJson["potions"][selectedPotion]);
         enhanced_symbol = "";
         if (selectedPotionMode !== "lingering") {
             if (selectedPotion === "potion_of_turtle_master") {
                 $(".potion-info-text").append(`
-                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} (${data["potions"][selectedPotion]["extended"][1]})</p>
-                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} (${data["potions"][selectedPotion]["extended"][1]})</p>
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} ${data["potions"][selectedPotion]["extended"][1]}</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} ${data["potions"][selectedPotion]["extended"][1]}</p>
                 `);
             } else {
                 $(".potion-info-text").append(`
-                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${enhanced_symbol + " "}(${data["potions"][selectedPotion]["extended"][1]})</p>
+                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${enhanced_symbol + " "}${data["potions"][selectedPotion]["extended"][1]}</p>
                 `);
             }
         }
     } else if (selectedBoost === languageJson['secondary-items']["enhanced"] && data["potions"][selectedPotion]["enhanced"][0]) {
         lingering_time = data["potions"][selectedPotion]["lingering"][2]
         potiondescription = data["potions"][selectedPotion]["potion_description"][2];
-        $("#solution-header").html(languageJson["potions"][selectedPotion] + " " + data["potions"][selectedPotion]["enhanced"][2] + ":");
+        $("#solution-header").html(languageJson["potions"][selectedPotion] + " " + data["potions"][selectedPotion]["enhanced"][2]);
         enhanced_symbol = data["potions"][selectedPotion]["enhanced"][2];
         if (selectedPotionMode !== "lingering") {
             if (selectedPotion === "potion_of_turtle_master") {
                 $(".potion-info-text").append(`
-                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"VI"} (${data["potions"][selectedPotion]["enhanced"][1]})</p>
-                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"IV"} (${data["potions"][selectedPotion]["enhanced"][1]})</p>
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"VI"} ${data["potions"][selectedPotion]["enhanced"][1]}</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"IV"} ${data["potions"][selectedPotion]["enhanced"][1]}</p>
                 `);
             } else {
                 $(".potion-info-text").append(`
-                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}(${data["potions"][selectedPotion]["enhanced"][1]})</p>
+                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}${data["potions"][selectedPotion]["enhanced"][1]}</p>
                 `);
             }
         }
     } else {
         lingering_time = data["potions"][selectedPotion]["lingering"][0];
         potiondescription = data["potions"][selectedPotion]["potion_description"][0];
-        $("#solution-header").html(languageJson["potions"][selectedPotion] + ":");
+        $("#solution-header").html(languageJson["potions"][selectedPotion]);
         enhanced_symbol = "";
         if (selectedPotionMode !== "lingering") {
             if (selectedPotion === "potion_of_turtle_master") {
                 $(".potion-info-text").append(`
-                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} (${data["potions"][selectedPotion].length})</p>
-                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} (${data["potions"][selectedPotion].length})</p>
+                    <p style="color: ${effect_color[0]};">${languageJson["potion_effects"][effect[0]]} ${"IV"} ${data["potions"][selectedPotion].length}</p>
+                    <p style="color: ${effect_color[1]};">${languageJson["potion_effects"][effect[1]]} ${"III"} ${data["potions"][selectedPotion].length}</p>
                 `);
             } else {
                 $(".potion-info-text").append(`
-                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}(${data["potions"][selectedPotion].length})</p>
+                    <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}${data["potions"][selectedPotion].length}</p>
                 `);
             }
         }
@@ -146,7 +146,7 @@ function potionTitle(selectedPotion, selectedBoost, selectedPotionMode) {
             }
         } else {
             $(".potion-info-text").append(`
-                <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}(${lingering_time})</p>
+                <p style="color: ${effect_color};">${languageJson["potion_effects"][effect]}${" " + enhanced_symbol + " "}${lingering_time}</p>
             `);
         }
     }
