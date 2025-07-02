@@ -21,7 +21,22 @@ window.onload = function() {
     buildPotionSelection();
     initializeReloadButton();
     BrewButton();
+    ScrollDown();
 };
+
+function ScrollDown() {
+    document.getElementById('potion-button').addEventListener('click', function() {
+        const customBox = document.querySelector('.custom-box');
+        if (customBox) {
+        // Mostrar la caja si está oculta
+        if (customBox.style.display === 'none' || getComputedStyle(customBox).display === 'none') {
+            customBox.style.display = 'block';
+        }
+        // Scroll suave hacia custom-box
+        customBox.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
 
 document.body.addEventListener("click", (ev) => {
     const isExpandibleTitle = !!ev.target.closest(".expandable-title-bar");

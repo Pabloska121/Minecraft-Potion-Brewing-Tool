@@ -448,6 +448,37 @@ hr {
   border-radius: 8px;
 }
 
+.guide-section h2 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.guide-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.guide-step p {
+  flex: 1;
+  text-align: left;
+  font-size: 16px;
+  margin: 0;
+  max-width: 400px;
+}
+
+.guide-step img {
+  max-width: 400px;
+  height: auto;
+  image-rendering: pixelated;
+  border: 4px solid #444;
+  border-radius: 4px;
+}
+
 .footer {
   position: fixed;
   right: 0;
@@ -593,11 +624,19 @@ body h1, body h2 {
   padding: 10px;
 }
 
+.guide-section h2 {
+  font-size: 20px;
+}
+
 .step-right {
   transform: scale(0.8) translateX(20px) translateY(30px);
   transform-origin: top left;
   margin-top: 10px;
   margin-bottom: 0px;
+}
+
+.guide-step img {
+  width: 100%;
 }
 
 .footer {
